@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
+import { MdShoppingBasket, MdAdd, MdLogout, MdTableRows, MdDelete } from "react-icons/md";
 import { motion } from "framer-motion";
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -32,6 +32,7 @@ const Header = () => {
     } else {
       setIsMenu(!isMenu);
     }
+
   };
 
   const logout = () => {
@@ -56,8 +57,8 @@ const Header = () => {
       {/* desktop & tablet */}
       <div className="hidden md:flex w-full h-full items-center justify-between">
         <Link to={"/"} className="flex items-center gap-2">
-          
-          <p className="text-headingColor text-[35px] font-bold"> <span className="text-green-600">E-canteen</span></p>
+
+          <p className="text-headingColor text-[35px] font-bold"> <span className="text-green-600">Just Eat It !</span></p>
         </Link>
 
         <div className="flex items-center gap-8">
@@ -67,18 +68,24 @@ const Header = () => {
             exit={{ opacity: 0, x: 200 }}
             className="flex items-center gap-24 "
           >
+            <Link to={"/"}>
             <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
               Home
             </li>
-            <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
+            </Link>
+            {/* <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
               Menu
-            </li>
+            </li> */}
+            <Link to={"/AboutUs"}>
             <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
               About Us
             </li>
+            </Link>
+            <Link to={"/Services"}>
             <li className="text-lg text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer">
               Service
             </li>
+            </Link>
           </motion.ul>
 
           <div
@@ -113,17 +120,51 @@ const Header = () => {
                 {user && user.email === "bhavik.sk.rajpal@gmail.com" && (
                   <Link to={"/createItem"}>
                     <p
-                      className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      className="px-4 py-4 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
                       onClick={() => setIsMenu(false)}
                     >
-                      New Item <MdAdd />
+                      New Item<MdAdd />
                     </p>
                   </Link>
-                  
+
                 )}
-                
+                {user && user.email === "bhavik.sk.rajpal@gmail.com" && (
+                  <Link to={"/orderdetails"}>
+                    <p
+                      className="px-3 py-4 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Order Details <MdTableRows />
+                    </p>
+                  </Link>
+
+                )}
+
+                {user && user.email === "bhavik.sk.rajpal@gmail.com" && (
+                  <Link to={"/ManageProd"}>
+                    <p
+                      className="px-3 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Manage Prods <MdDelete />
+                    </p>
+                  </Link>
+
+                )}
+
+                {user && user.email !== "bhavik.sk.rajpal@gmail.com" && (
+                  <Link to={"/orderHistory"}>
+                    <p
+                      className="px-4 py-4 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Order History <MdLogout />
+                    </p>
+                  </Link>
+                )}
+
                 <p
-                  className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                  className="px-4 py-4 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
                   onClick={logout}
                 >
                   Logout <MdLogout />
@@ -170,7 +211,7 @@ const Header = () => {
               exit={{ opacity: 0, scale: 0.6 }}
               className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
             >
-              {user && user.email === "vetrivel.galaxy@gmail.com" && (
+              {user && user.email === "bhavik.sk.rajpal@gmail.com" && (
                 <Link to={"/createItem"}>
                   <p className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base">
                     New Item <MdAdd />
@@ -179,31 +220,71 @@ const Header = () => {
               )}
 
               <ul className="flex flex-col ">
+              <Link to={"./"}>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
                   Home
                 </li>
+                </Link>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
                   Menu
                 </li>
+                <Link to={"/AboutUs"}>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
                   About Us
                 </li>
+                </Link>
+                <Link to={"/Services"}>
                 <li
                   className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-100 px-4 py-2"
                   onClick={() => setIsMenu(false)}
                 >
                   Service
                 </li>
+                </Link>
               </ul>
+              {user && user.email === "bhavik.sk.rajpal@gmail.com" && (
+                  <Link to={"/orderdetails"}>
+                    <p
+                      className="px-3 py-4 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Order Details <MdTableRows />
+                    </p>
+                  </Link>
+
+                )}
+
+                {user && user.email === "bhavik.sk.rajpal@gmail.com" && (
+                  <Link to={"/ManageProd"}>
+                    <p
+                      className="px-3 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Manage Prods <MdDelete />
+                    </p>
+                  </Link>
+
+                )}
+
+                {user && user.email !== "bhavik.sk.rajpal@gmail.com" && (
+                  <Link to={"/orderHistory"}>
+                    <p
+                      className="px-4 py-4 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
+                      onClick={() => setIsMenu(false)}
+                    >
+                      Order History <MdLogout />
+                    </p>
+                  </Link>
+                )}
 
               <p
                 className="m-2 p-2 rounded-md shadow-md flex items-center justify-center bg-gray-200 gap-3 cursor-pointer hover:bg-gray-300 transition-all duration-100 ease-in-out text-textColor text-base"

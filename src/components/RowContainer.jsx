@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useReducer } from "react";
 import { MdAdd } from "react-icons/md";
 import { motion } from "framer-motion";
 import NotFound from "../img/NotFound.svg";
@@ -22,11 +22,15 @@ const RowContainer = ({ flag, data, scrollValue }) => {
 
   useEffect(() => {
     rowContainer.current.scrollLeft += scrollValue;
+    
   }, [scrollValue]);
 
   useEffect(() => {
     addtocart();
+    
   }, [items]);
+
+  
 
   return (
     <div

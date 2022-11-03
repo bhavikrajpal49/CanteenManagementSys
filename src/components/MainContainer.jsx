@@ -8,7 +8,8 @@ import MenuContainer from "./MenuContainer";
 import CartContainer from "./CartContainer";
 
 const MainContainer = () => {
-  const [{ foodItems, cartShow }, dispatch] = useStateValue();
+  const [{ foodItems, cartShow, orderDetails }, dispatch] = useStateValue();
+  //const [{ orderDetails }, dispatch] = useStateValue();
   const [scrollValue, setScrollValue] = useState(0);
 
   useEffect(() => {}, [scrollValue, cartShow]);
@@ -46,7 +47,9 @@ const MainContainer = () => {
           data={foodItems?.filter((n) => n.category === "fruits")}
         />
       </section> */}
-
+      <orderDetails
+          data={orderDetails}
+        />
       <MenuContainer />
 
       {cartShow && <CartContainer />}

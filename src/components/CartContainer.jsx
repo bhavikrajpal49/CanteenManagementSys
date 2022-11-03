@@ -7,18 +7,50 @@ import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import EmptyCart from "../img/emptyCart.svg";
 import CartItem from "./CartItem";
+import { orderItem,orderHistory } from "../utils/firebaseFunctions";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const CartContainer = () => {
   const [{ cartShow, cartItems, user }, dispatch] = useStateValue();
   const [flag, setFlag] = useState(1);
   const [tot, setTot] = useState(0);
 
+  ///
+  const [status, setStatus] = useState("Pending");
+
+  
   const showCart = () => {
     dispatch({
       type: actionType.SET_CART_SHOW,
       cartShow: !cartShow,
     });
   };
+
+
+
+
+  const PayCash = () => {
+    const data = { 
+      cartItems,user,
+      status: status }
+    
+    orderItem(data);
+    orderHistory(data);
+    console.log("Data Uploaded successfully to db 😊");
+    
+    clearCart();
+    
+    toast.success("Order Placed Successfully ",{
+      position: "top-center",
+      theme: "colored",
+    }
+  )
+
+
+  }
 
   useEffect(() => {
     let totalPrice = cartItems.reduce(function (accumulator, item) {
@@ -28,6 +60,8 @@ const CartContainer = () => {
     console.log(tot);
   }, [tot, flag]);
 
+
+
   const clearCart = () => {
     dispatch({
       type: actionType.SET_CARTITEMS,
@@ -35,7 +69,82 @@ const CartContainer = () => {
     });
 
     localStorage.setItem("cartItems", JSON.stringify([]));
+
   };
+
+
+
+//online payment
+const loadScript = (src) =>{
+  return new Promise((resolve) => {
+    const script = document.createElement('script')
+    script.src = src;
+    
+    script.onload = () => {
+      resolve(true);
+  
+    }
+  
+    script.onerror = () => {
+      resolve(false); 
+    }
+     document.body.appendChild(script);
+  }) 
+  }
+  
+      const displayRazorpay = async (amount) => {
+         const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+         if (!res) {
+          alert('Failed to load RazorPay SDK!');
+          return;
+         }
+     
+         const options = {
+          key: 'rzp_test_H0QjiELPFlYNHm',
+          currency: "INR",
+          amount: amount*100,
+          name: "Just Eat It!",
+          image: "https://res.cloudinary.com/djww0nfoy/image/upload/v1667057057/web%20dev/restaurant_nm5ipb.png",
+          description:"Here's your bill",
+  
+          handler: function (response) {
+            // alert(response.razorpay_payment_id);
+            toast.success("Payment is Successful Order Placed Sucessfully !! ",{
+              position: "top-center",
+              theme: "colored",
+            })
+          },
+          prefill: {
+            name: "Your Payment"
+          }
+
+          
+          
+
+
+         };
+  
+         const paymentObject = new window.Razorpay(options)
+        paymentObject.open(); 
+
+        //for loading to database
+        const data = { 
+          cartItems,user,
+          status: status }
+        
+        orderItem(data);
+        orderHistory(data);
+        console.log("Data Uploaded successfully to db 😊");
+        
+        clearCart();
+        
+        // toast.success("Order Placed Successfully ",{
+        //   position: "top-center",
+        //   theme: "colored",
+        // })
+      }
+
+
 
   return (
     <motion.div
@@ -83,28 +192,46 @@ const CartContainer = () => {
               <p className="text-gray-400 text-lg">Sub Total</p>
               <p className="text-gray-400 text-lg">Rs {tot}</p>
             </div>
-             { <div className="w-full flex items-center justify-between">
+            {/* {<div className="w-full flex items-center justify-between">
               <p className="text-gray-400 text-lg">18% Tax</p>
-              <p className="text-gray-400 text-lg">{(18*tot)/100}</p>
-            </div> } 
+              <p className="text-gray-400 text-lg">{(18 * tot) / 100}</p>
+            </div>} */}
 
             <div className="w-full border-b border-gray-600 my-2"></div>
 
             <div className="w-full flex items-center justify-between">
               <p className="text-gray-200 text-xl font-semibold">Grand Total</p>
               <p className="text-gray-200 text-xl font-semibold">
-                Rs {tot + (18*tot)/100} /-
+                {/* Rs {tot + (18 * tot) / 100}/- */}
+                Rs {tot} /-
               </p>
             </div>
 
             {user ? (
-              <motion.button
-                whileTap={{ scale: 0.8 }}
-                type="button"
-                className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
-              >
-                Check Out
-              </motion.button>
+              
+              <div className="w-full">
+                {/* <Link to={"/orderHistory"}> */}
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  type="button"
+                  className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                onClick={PayCash}
+                >
+                  Cash On Delivery
+                </motion.button>
+                {/* </Link> */}
+
+                <motion.button
+                  whileTap={{ scale: 0.8 }}
+                  type="button"
+                  className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
+                  onClick={()=>displayRazorpay(tot)}
+                >
+                  Pay Online
+                </motion.button>
+
+              </div>
+
             ) : (
               <motion.button
                 whileTap={{ scale: 0.8 }}
@@ -112,6 +239,7 @@ const CartContainer = () => {
                 className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
               >
                 Login to check out
+
               </motion.button>
             )}
           </div>
@@ -124,8 +252,10 @@ const CartContainer = () => {
           </p>
         </div>
       )}
+      <ToastContainer />
     </motion.div>
   );
+  
 };
 
 export default CartContainer;
