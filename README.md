@@ -1,70 +1,75 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# (Just Eat It !)
+## Canteen Automation System 
 
-## Available Scripts
+#### Canteen Automation System,is a system for ordering foods online.The main advantage of this system is that it greatly simplifies the ordering process for both the customer and the canteen. When the customer visits the ordering webpage, they are presented with an interactive and up-to-date menu, complete with all available options and dynamically adjusting prices based on the selected options. 
+#### After making a selection, the item is then added to their order, which the customer can review the details of at any time before checking out. This provides instant visual confirmation of what was selected and ensures that items in the order are, in fact, what was intended.
+#### This system also greatly lightens the load on the canteen’s end, as the entire process of taking orders is automated. Once an order is placed on the webpage, it is entered into thedatabase and then retrieved, in pretty much real-time, by a desktop application on the canteen’send. Within this application, all items in the order are displayed, along with their corresponding options and delivery details, in a concise and easy to read manner. This allows canteen employees to quickly go through the orders as they are placed and produce the necessary items with minimal delay and confusion.
 
-In the project directory, you can run:
+## Output
+- Here's the link to the website https://canteenprj.web.app/
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Frontend:** React, Redux, Reducer, TailwindCSS
 
-### `yarn test`
+**Backend:** Firebase
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**IDE:** Vscode
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Functions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### User's Portal -
+- Displays all Food Products with categories to filter from.
+- Can Add Or Remove food items to cart.
+- The user can use any payment method i.e COD or Online Payment using UPI or Card
+- After placing the order the user can check status and also can view Order History.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Admin's Portal -
+- Admin can Add/ Remove/ Update Food items.
+- Admin can also Check Order Details.
+- Along with that can also view payment details of the user.
 
-### `yarn eject`
+## Features
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Fast and Easy Food Ordering Process.
+- No Need to wait in Long queue's for ordering Food.
+- Responsive Website works across all devices.
+- Support's all Payment Methods.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Screenshots
 
-## Learn More
+Home Page
+![homePage](https://user-images.githubusercontent.com/92149680/200117637-cd9c1342-4d68-4ceb-849e-aee02f2104d6.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Menu
+![Menu](https://user-images.githubusercontent.com/92149680/200117651-b8e78e1f-91a9-41f9-a63b-3b4c53e0c67b.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Cart
+![cart](https://user-images.githubusercontent.com/92149680/200117672-ca6c2bb8-f67d-4109-95db-b2e5d7246c07.png)
 
-### Code Splitting
+Order Details (Admin)
+![orddetails](https://user-images.githubusercontent.com/92149680/200117683-e84e4520-1fc4-47ee-8658-f1ace2bf99b3.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Order History (User)
+![history](https://user-images.githubusercontent.com/92149680/200117695-f97f34e0-d185-45f9-b430-c2cd640cf3dc.png)
 
-### Analyzing the Bundle Size
+Payment
+![Payment](https://user-images.githubusercontent.com/92149680/200117720-2c3dcfa8-0aad-4b43-b869-8312f725b504.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+About Us
+![about](https://user-images.githubusercontent.com/92149680/200117729-4d304358-f9d4-40ff-927c-76f0472ef7ec.png)
 
-### Making a Progressive Web App
+Services
+![services](https://user-images.githubusercontent.com/92149680/200117737-28a6b4a0-4bb3-4673-8dc9-b8e52894649a.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/bhavikrajpal49)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/bhavik-rajpal-868427212/)
+[![leetcode](https://img.shields.io/badge/leetcode-1DA1F2?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/bhavik_rajpal/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
